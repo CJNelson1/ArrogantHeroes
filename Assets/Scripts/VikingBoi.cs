@@ -8,6 +8,7 @@ public class VikingBoi : MonoBehaviour
 {
     public string Name;
     private System.Random seed;
+    private VikingStats stats;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,8 @@ public class VikingBoi : MonoBehaviour
         // build name from random gen
         this.Name = NameGenerator.GenerateName(seed);
 
+        // roll stats
+        this.stats = new VikingStats(seed);
     }
 
     // Update is called once per frame
