@@ -1,34 +1,26 @@
 public class VikingStats
 {
-    private double health;
-    private double attack;
-    private double defense;
+    #region Stats
+    public double health;
+    public double attack;
+    public double defense;
+    public double Wisdom;
+    public double CritChance;
+    #endregion
 
-    /// <summary>
-    /// Viking Stats Constructor
-    /// </summary>
-    /// <param name="seed">Random object for stat generation</param>
+    #region Traits
+    public bool Teamwork;
+    #endregion
+
     public VikingStats(System.Random seed)
     {
-        // initialize stats between 1 and 10
-        this.health = seed.NextDouble() * 10;
-        this.attack = seed.NextDouble() * 10;
-        this.defense = seed.NextDouble() * 10;
-    }
+        int baseMax = 10;
+        
+        // init stats
+        this.health = seed.NextDouble() * baseMax;
+        this.attack = seed.NextDouble() * baseMax;
+        this.defense = seed.NextDouble() * baseMax;
 
-    public double Health()
-    {
-        return health;
+        // does a viking start with traits? if so, give them one
     }
-
-    public double Attack()
-    {
-        return attack;
-    }
-
-    public double Defense()
-    {
-        return defense;
-    }
-
 }
