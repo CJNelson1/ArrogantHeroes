@@ -6,25 +6,81 @@ using System;
 
 public class VikingBoi : MonoBehaviour
 {
-    public string Name;
-    private System.Random seed;
+    public readonly string name;
+    public readonly System.Random seed;
     private VikingStats stats;
+    public readonly string id;
 
-    // Start is called before the first frame update
-    void Start()
+    public VikingBoi()
     {
         this.seed = new System.Random();
+        this.id = Guid.NewGuid().ToString();
 
         // build name from random gen
-        this.Name = NameGenerator.GenerateName(seed);
+        this.name = NameGenerator.GenerateName(seed);
 
         // roll stats
         this.stats = new VikingStats(seed);
     }
 
+    public void SelectAction()
+    {
+        // init the traits array to all zeroes
+        int potentialActions = new int[Enum.GetNames(typeof(VikingBoi.Actions)).Length];
+
+        /* Bloodthirsty */
+        if (this.stats.traits[Traits.Bloodthirsty])
+        {
+            // manipulate numbers
+        }
+
+        /* Greedy */
+        if (this.stats.Traits[Traits.Greedy])
+        {
+            // manipulate numbers
+        }
+
+        /* Haughty */
+        if (this.stats.Traits[Traits.Haughty])
+        {
+            // manipulate numbers
+        }
+
+        // etc.
+    }
+
+    public void LevelUpViking()
+    {
+        // ???
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
-        // if they make multiple animates
+        // every X frames, change animation, move body parts a little, change spites as necessary
+    }
+
+    public enum Actions
+    {
+        Attack,
+        Flee
+    }
+
+    public enum Traits
+    {
+        Bloodthirsty,
+        Greedy,
+        Haughty,
+        Overconfident,
+        Religious,
+        Drunkard,
+        Cautious,
+        Coward
     }
 }

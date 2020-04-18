@@ -14,7 +14,7 @@ public class Map
     /// The list of locations indexed by ID.
     /// </summary>
     /// <returns>Dictionary of locations indexed by ID</returns>
-    public ReadOnlyDictionary<string,Location> Vikings()
+    public ReadOnlyDictionary<string,Location> Locations()
     {
         return new ReadOnlyDictionary<string,Location>(this.roster);
     }
