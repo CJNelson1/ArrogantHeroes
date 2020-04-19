@@ -1,21 +1,59 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using UnityEngine;
 
-public class Map 
+public class Map : MonoBehaviour
 {
-    private Dictionary<string,Location> map;
+    public Dictionary<string, Location> map;
+    public int dayNumber = 0;
+    public Location SelectedLocation;
 
-    public Map() 
-    {
-        this.map = new Dictionary<string,Location>();
-    } 
+    public static Map instance;
 
-    /// <summary>
-    /// The list of locations indexed by ID.
-    /// </summary>
-    /// <returns>Dictionary of locations indexed by ID</returns>
-    public ReadOnlyDictionary<string,Location> Locations()
+    public void AdvanceDay()
     {
-        return new ReadOnlyDictionary<string,Location>(this.roster);
+        // level up the bois from last mission
+        foreach (VikingBoi boi in VikingManager.instance.VMMaster) 
+        {
+           if (boi.SelectedForScenario)
+           {
+               boi.LevelUpViking(SelectedLocation.scenarioLevel);
+           }
+        }
+
+        // assign new scenarios to map locations?
+        foreach (Location location in map.Values)
+        {
+            location.GibScenario(dayNumber);
+        }
+
+        // get more bois?
+
+        dayNumber++;
+    }
+
+    void Awake() 
+    {
+        if(!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        this.map = new Dictionary<string, Location>();
+        AdvanceDay();
+    }
+
+    void Update() 
+    {
+        
     }
 }

@@ -11,7 +11,16 @@ public static class NameGenerator
     /// <returns>A random viking name</returns>
     public static string GenerateName(System.Random seed)
     {
-        return FirstName(seed) + " " + LastNamePartOne(seed) + LastNamePartTwo(seed) + " " + Modifier(seed);
+        //Harmonize names
+        string partOne = LastNamePartOne(seed);
+        string partTwo = LastNamePartTwo(seed);
+        string harmonizedName;
+        if (partOne == null || partOne == "Mc")
+        {
+            partTwo = char.ToUpper(partTwo[0]) + partTwo.Substring(1);
+        }
+        harmonizedName = partOne + partTwo;
+        return FirstName(seed) + " " + harmonizedName + " " + Modifier(seed);
     }
 
     /// <summary>
@@ -67,21 +76,25 @@ public static class NameGenerator
 
     private static string[] firstNames = 
     {
-        "Huge"
+        "Huge", "Leif", "Sindre", "Toki", "Sten", "Svend", "Troels", "Torsten", "Ulf", "Magnus", "Olaf", "Finni", "Vemund",
+        "Bjarni", "Ofeigr", "Kolbeinn", "Ragnar", "Bjorn", "Harald", "Sweyn", "Eddval", "Kotkel"
     };
 
     private static string[] lastNamePartOnes = 
     {
-        "Mc"
+        "Mc", "Strokes", "Big", "Thunder", "War", "Leather", "Hairy", "Coal", "Long", "Butter", "Iron", "Blood", "Grey", "Ox",
+        "Creek"
     };
 
     private static string[] lastNamePartTwos = 
     {
-        "Large"
+        "large", "hard", "son", "beard", "Burnouf", "Estur", "Godefroy", "Osmond", "Hastain", "Ivar", "Barelegged", "tooth", 
+        "neck", "breeches", "brow", "penis", "Lodbrok", "side", "axe", "cloak", "foot", "nose"
     };
 
     private static string[] modifiers = 
     {
-        "the Best"
+        "the Best", "the Fuckboi", "the Red", "the Worst", "the Average", "the Generous", "the Deepminded", "the Witch-Breaker", 
+        "the Boneless", "the Stout"
     };
 }

@@ -6,70 +6,77 @@ using System;
 
 public class VikingBoi : MonoBehaviour
 {
-    public readonly string name;
-    public readonly System.Random seed;
-    private VikingStats stats;
-    public readonly string id;
+    public string vikingName;
+    public System.Random seed;
+    public VikingStats stats;
+    public string ID;
+    public bool SelectedForScenario;
+    public bool Alive;
 
-    public VikingBoi()
-    {
+    void Start()
+    {        
         this.seed = new System.Random();
-        this.id = Guid.NewGuid().ToString();
+        this.ID = Guid.NewGuid().ToString();
 
         // build name from random gen
-        this.name = NameGenerator.GenerateName(seed);
+        this.vikingName = NameGenerator.GenerateName(seed);
 
         // roll stats
         this.stats = new VikingStats(seed);
     }
 
-    public void SelectAction()
+    /// <summary>
+    /// Select one action for this viking to take.
+    /// </summary>
+    /// <param name="inGroup">Whether this viking is in a group (and can therefore perform group actions)</param>
+    /// <param name="firstAction">Whether this is the first action of the scenario</param>
+    public VikingBoi.Actions SelectAction(bool inGroup, bool firstAction)
     {
-        // init the traits array to all zeroes
-        int potentialActions = new int[Enum.GetNames(typeof(VikingBoi.Actions)).Length];
-
-        /* Bloodthirsty */
-        if (this.stats.traits[Traits.Bloodthirsty])
-        {
-            // manipulate numbers
-        }
-
-        /* Greedy */
-        if (this.stats.Traits[Traits.Greedy])
-        {
-            // manipulate numbers
-        }
-
-        /* Haughty */
-        if (this.stats.Traits[Traits.Haughty])
-        {
-            // manipulate numbers
-        }
-
-        // etc.
+        return ActionHelper.SelectAction(this.seed, this.stats, inGroup, firstAction, false);
     }
 
-    public void LevelUpViking()
+    public void LevelUpViking(int lastScenarioLevel)
     {
-        // ???
+        if (this.Alive && !this.stats.ScenarioFled)
+        {
+            TraitAssignment.AssignNewTrait(this);       // Assign new trait first since that will influence stats
+            TraitAssignment.IncreaseStats(this, lastScenarioLevel);
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public bool Equals(VikingBoi other)
     {
+        if (other == null)
+        {
+            return false;
+        }
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // every X frames, change animation, move body parts a little, change spites as necessary
+        return (this.ID == other.ID);
     }
 
     public enum Actions
     {
         Attack,
-        Flee
+        Defend,
+        Insult,
+        Drink,
+        Cower,
+        Flee,
+        FerociousAttack,
+        MockingAttack,
+        PlayTheVillain,
+        RecklessAttack,
+        Plunder,
+        DedicateToOdin,
+        PrayToTheGods,
+        GoBerserk,
+        Brag,
+        BerserkerRage,      // Group action
+        GiveASpeech,        // Group action
+        Taunt,              // Group action
+        HideInTheBack,      // Group action
+        StealAllTheGlory,   // Group action
+        GangUp              // Group action
     }
 
     public enum Traits
@@ -81,6 +88,19 @@ public class VikingBoi : MonoBehaviour
         Religious,
         Drunkard,
         Cautious,
-        Coward
+        Coward,
+        Frenzied,
+        Suicidal,
+        Follower,
+        Blowhard,
+        Anarchist,
+        Jerk,
+        Christian,
+        PartyAnimal,
+        Antagonizer,
+        Contrarian,
+        Superstitious,
+        Violent,
+        Performer
     }
 }

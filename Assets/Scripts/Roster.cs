@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using UnityEngine;
 
-public class Roster 
+public class Roster : MonoBehaviour 
 {
-    private Dictionary<string,VikingBoi> roster;
+    public Dictionary<string,VikingBoi> roster;
 
     public Roster() 
     {
@@ -26,15 +28,23 @@ public class Roster
     /// <returns>True if a viking was removed, false otherwise</returns>
     public bool RemoveViking(string vikingID)
     {
-        return this.roster.Remove(newViking.ID);
+        return this.roster.Remove(vikingID);
     }
 
     /// <summary>
-    /// The roster of vikings indexed by ID.
+    /// The vikings selected for a scenario indexed by ID.
     /// </summary>
-    /// <returns>Dictionary of vikings indexed by ID</returns>
-    public ReadOnlyDictionary<string,VikingBoi> Vikings()
+    /// <returns>Dictionary of vikings selected for a scenario indexed by ID</returns>
+    public Dictionary<string, VikingBoi> SelectedVikings()
     {
-        return new ReadOnlyDictionary<string, VikingBoi>(this.roster);
+        Dictionary<string, VikingBoi> SelectedVikings = new Dictionary<string, VikingBoi>();
+        foreach (VikingBoi boi in this.roster.Values)
+        {
+            if (boi.SelectedForScenario)
+            {
+                SelectedVikings.Add(boi.ID, boi);
+            }
+        }
+        return SelectedVikings;
     }
 }
