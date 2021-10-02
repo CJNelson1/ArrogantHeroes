@@ -1,7 +1,7 @@
 using System;
 
-public class VikingStats
-{
+public class VikingStats{
+
     #region Permanent Stats
     public int Health;
     public int Attack;
@@ -40,7 +40,7 @@ public class VikingStats
     public VikingStats(System.Random seed)
     {
         // init stats
-        this.Health = seed.Next(80, 100);
+        this.Health = seed.Next(40, 60);
         this.Attack = seed.Next(10, 20);
         this.Defense = seed.NextDouble();       // Decimal between 0-1
         this.CritChance = seed.NextDouble();    // Decimal between 0-1

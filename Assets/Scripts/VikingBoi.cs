@@ -7,15 +7,18 @@ using System;
 public class VikingBoi : MonoBehaviour
 {
     public string vikingName;
+    public int head = -1;
+    public int body = -1;
+    public int legs = -1;
     public System.Random seed;
     public VikingStats stats;
     public string ID;
     public bool SelectedForScenario;
-    public bool Alive;
+    public bool Alive = true;
 
-    void Start()
+    void Awake()
     {        
-        this.seed = new System.Random();
+        this.seed = VikingManager.instance.seed;
         this.ID = Guid.NewGuid().ToString();
 
         // build name from random gen

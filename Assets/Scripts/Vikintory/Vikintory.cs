@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Vikintory : MonoBehaviour
 {
-    public LilViking lilVikPrefab;
+    public GameObject lilVikPrefab;
     void Start() 
     {
         for (int i = 0; i < VikingManager.instance.VMMaster.Count; i++)
@@ -18,11 +18,11 @@ public class Vikintory : MonoBehaviour
             {
                 findby = string.Format("Panel ([0])", i.ToString());
             }
-            VikingBoi newGuy = VikingManager.instance.VMMaster[i];
-            Vector3 location = new Vector3(i*80, 300, -1);
-            location.z -= .2f;
-            LilViking sprite = Instantiate(lilVikPrefab, location, Quaternion.identity);
-            sprite.id = newGuy.ID;
+            // VikingBoi newGuy = VikingManager.instance.VMMaster[i];
+            // Vector3 location = new Vector3(i*80, 300, -1);
+            // location.z -= .2f;
+            // GameObject sprite = Instantiate(lilVikPrefab, location, Quaternion.identity);
+            // sprite.id = newGuy.ID;
         }
         
     }

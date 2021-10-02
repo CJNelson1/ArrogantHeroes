@@ -9,32 +9,41 @@ public class VikingManager : MonoBehaviour
     
     public SpriteGenerator spriteGenerator;
     public static VikingManager instance;
+    public System.Random seed;
+    public bool first;
     void Awake() 
     {
         if(!instance)
         {
             instance = this;
+            seed = new System.Random();
+            first = true;
         }
         else
         {
             Destroy(gameObject);
         }
+
         DontDestroyOnLoad(gameObject);
     }
-    
-    void Update() 
-    {
-        if(Input.GetButtonDown("Jump"))
+    public void CleanList()
+    {   
+        if (this.VMMaster.Find(x=>x.Alive == true) == null)
         {
-            VikingBoi boi = gameObject.AddComponent(typeof(VikingBoi)) as VikingBoi;
-            AddViking(boi);
+            VikingManager.instance.AddViking();
+            VikingManager.instance.AddViking();
+            VikingManager.instance.AddViking();
         }
-        if(Input.GetButtonDown("Horizontal"))
+        foreach(VikingBoi v in this.VMMaster)
         {
-
+            v.SelectedForScenario = false;
         }
     }
-
+    public void AddViking()
+    {
+        VikingBoi boi = gameObject.AddComponent(typeof(VikingBoi)) as VikingBoi;
+        AddViking(boi);
+    }
     public void AddViking(VikingBoi newBoi)
     {
         VMMaster.Add(newBoi);

@@ -8,7 +8,6 @@ public class SpriteGenerator : MonoBehaviour
     public Sprite[] SpHeads;
     public Sprite[] SpBodies;
     public Sprite[] SpLegs;
-    System.Random seed = new System.Random();
     public Sprite GetHead(int i)
     {
         return SpHeads[i];
@@ -25,14 +24,14 @@ public class SpriteGenerator : MonoBehaviour
     }
     public int AssignHead()
     {
-        return seed.Next(SpHeads.Length);
+        return VikingManager.instance.seed.Next(SpHeads.Length);
     }
     public int AssignBody()
     {
-        return seed.Next(SpBodies.Length);
+        return VikingManager.instance.seed.Next(SpBodies.Length);
     }
     public int AssignLegs()
     {
-        return seed.Next(SpLegs.Length);
+        return VikingManager.instance.seed.Next(SpLegs.Length);
     }
 }

@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: 1a330981bc430f143ba5588060db9449
   - enabled: 1
-    path: Assets/Scenes/PillageSelect.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Map.unity
+    guid: 159603eda68ca3942bcee51b78be4027
+  - enabled: 1
+    path: Assets/Scenes/Scenario.unity
+    guid: 0e12e4062a0e034428509c9578e946df
+  - enabled: 1
+    path: Assets/Scenes/End Screen.unity
+    guid: 459dd416e6d8f53459ce43ef1767ba8d
   m_configObjects: {}

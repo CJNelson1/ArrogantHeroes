@@ -7,7 +7,10 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("PillageSelect");
+        VikingManager.instance.AddViking();
+        VikingManager.instance.AddViking();
+        VikingManager.instance.AddViking();
+        SceneManager.LoadScene("Map");
     }
     public void OpenOptions()
     {

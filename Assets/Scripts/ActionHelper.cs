@@ -6,19 +6,19 @@ using UnityEngine;
 public static class ActionHelper
 {  
     #region Weight Constants
-    private const int Very_High_Weight = 1000;      // Big Chungus
+    private const int Very_High_Weight = 1500;      // Big Chungus
     private const int High_Weight = 250;
     private const int Medium_Weight = 100;
-    private const int Low_Weight = 50;
+    private const int Low_Weight = 25;
     private const int Very_Low_Weight = 20;
     private const int No_Weight = 10;
     #endregion
 
     #region Multiplier Constants
-    private const double Regular_Higher_Multiplier = 100;
-    private const double Significant_Higher_Multiplier = 500;
-    private const double Regular_Lower_Multiplier = 0.9;
-    private const double Significant_Lower_Multiplier = 0.5;
+    private const double Regular_Higher_Multiplier = 25;
+    private const double Significant_Higher_Multiplier = 50;
+    private const double Regular_Lower_Multiplier = 0.95;
+    private const double Significant_Lower_Multiplier = 0.75;
     #endregion
 
     public static VikingBoi.Actions SelectAction(System.Random seed, VikingStats stats, bool inGroup, bool firstAction, bool debug)
@@ -34,7 +34,7 @@ public static class ActionHelper
         potentialActions[(int) VikingBoi.Actions.Defend] = High_Weight;
 
         // Insult - Medium Weighted
-        potentialActions[(int) VikingBoi.Actions.Insult] = Medium_Weight;
+        potentialActions[(int) VikingBoi.Actions.Insult] = Low_Weight;
 
         // Drink - Low Weighted
         potentialActions[(int) VikingBoi.Actions.Drink] = Low_Weight;
@@ -43,7 +43,7 @@ public static class ActionHelper
         potentialActions[(int) VikingBoi.Actions.Cower] = Very_Low_Weight;
 
         // Flee - Very low weighted
-        potentialActions[(int) VikingBoi.Actions.Flee] = Very_Low_Weight;
+        potentialActions[(int) VikingBoi.Actions.Flee] = 0;
 
         // Ferocious Attack - Weight based on CritChance (Furocity)
         potentialActions[(int) VikingBoi.Actions.FerociousAttack] = stats.CritChance;
@@ -135,7 +135,7 @@ public static class ActionHelper
         potentialActions[(int) VikingBoi.Actions.Brag] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Overconfident] * Regular_Higher_Multiplier));
         potentialActions[(int) VikingBoi.Actions.Taunt] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Overconfident] * Regular_Higher_Multiplier));
         potentialActions[(int) VikingBoi.Actions.Cower] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Overconfident] * Regular_Lower_Multiplier));
-        potentialActions[(int) VikingBoi.Actions.Flee] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Overconfident] * Regular_Lower_Multiplier));
+        //potentialActions[(int) VikingBoi.Actions.Flee] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Overconfident] * Regular_Lower_Multiplier));
         potentialActions[(int) VikingBoi.Actions.Defend] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Overconfident] * Regular_Lower_Multiplier));
 
         /*
@@ -145,7 +145,7 @@ public static class ActionHelper
         */
         potentialActions[(int) VikingBoi.Actions.DedicateToOdin] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Religious] * Regular_Higher_Multiplier));
         potentialActions[(int) VikingBoi.Actions.PrayToTheGods] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Religious] * Regular_Higher_Multiplier));
-        potentialActions[(int) VikingBoi.Actions.Flee] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Religious] * Regular_Lower_Multiplier));
+        //potentialActions[(int) VikingBoi.Actions.Flee] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Religious] * Regular_Lower_Multiplier));
 
         /*
         Drunkard
@@ -163,7 +163,7 @@ public static class ActionHelper
         */
         potentialActions[(int) VikingBoi.Actions.Defend] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Cautious] * Regular_Higher_Multiplier));
         potentialActions[(int) VikingBoi.Actions.Cower] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Cautious] * Regular_Higher_Multiplier));
-        potentialActions[(int) VikingBoi.Actions.Flee] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Cautious] * Regular_Higher_Multiplier));
+        //potentialActions[(int) VikingBoi.Actions.Flee] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Cautious] * Regular_Higher_Multiplier));
         potentialActions[(int) VikingBoi.Actions.RecklessAttack] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Cautious] * Regular_Lower_Multiplier));
         potentialActions[(int) VikingBoi.Actions.GoBerserk] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Cautious] * Regular_Lower_Multiplier));
         potentialActions[(int) VikingBoi.Actions.MockingAttack] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Cautious] * Regular_Lower_Multiplier));
@@ -174,7 +174,7 @@ public static class ActionHelper
         Lowers: none
         */
         potentialActions[(int) VikingBoi.Actions.Cower] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Coward] * Regular_Higher_Multiplier));
-        potentialActions[(int) VikingBoi.Actions.Flee] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Coward] * Regular_Higher_Multiplier));
+        //potentialActions[(int) VikingBoi.Actions.Flee] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Coward] * Regular_Higher_Multiplier));
         potentialActions[(int) VikingBoi.Actions.HideInTheBack] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Coward] * Regular_Higher_Multiplier));
 
         /*
@@ -196,7 +196,7 @@ public static class ActionHelper
         {
             potentialActions[(int) VikingBoi.Actions.Defend] = 0;
             potentialActions[(int) VikingBoi.Actions.Cower] = 0;
-            potentialActions[(int) VikingBoi.Actions.Flee] = 0;
+            //potentialActions[(int) VikingBoi.Actions.Flee] = 0;
         }
 
         /*
@@ -204,14 +204,20 @@ public static class ActionHelper
         Raises: First action is always Dedicate to Odin
         Lowers: none
         */
-        if (firstAction) { return VikingBoi.Actions.DedicateToOdin; }
+        if (stats.Traits[(int)VikingBoi.Traits.Follower] > 0)
+        {
+            if (firstAction) { return VikingBoi.Actions.DedicateToOdin; }
+        }
 
         /*
         Blowhard
         Raises: First Action is always Brag
         Lowers: none
         */
-        if (firstAction) { return VikingBoi.Actions.Brag; }
+        if (stats.Traits[(int)VikingBoi.Traits.Blowhard] > 0)
+        {
+            if (firstAction) { return VikingBoi.Actions.Brag; }
+        }
 
         /*
         Anarchist
@@ -255,7 +261,10 @@ public static class ActionHelper
         Raises: First action is always Mocking Attack, Raises Taunt
         Lowers: Give a Speech, Gang Up
         */
-        if (firstAction) { return VikingBoi.Actions.MockingAttack; }
+        if (stats.Traits[(int)VikingBoi.Traits.Blowhard] > 0)
+        {
+            if (firstAction) { return VikingBoi.Actions.MockingAttack; }
+        }
         potentialActions[(int) VikingBoi.Actions.Taunt] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Antagonizer] * Regular_Higher_Multiplier));
         potentialActions[(int) VikingBoi.Actions.GiveASpeech] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Antagonizer] * Regular_Lower_Multiplier));
         potentialActions[(int) VikingBoi.Actions.GangUp] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Antagonizer] * Regular_Lower_Multiplier));
@@ -285,7 +294,10 @@ public static class ActionHelper
         Raises: First Action is always Go Berserk, Raises Berserker Rage
         Lowers: Mocking Attack
         */
-        if (firstAction) { return VikingBoi.Actions.GoBerserk; }
+        if (stats.Traits[(int)VikingBoi.Traits.Violent] > 0)
+        {
+            if (firstAction) { return VikingBoi.Actions.GoBerserk; }
+        }
         potentialActions[(int) VikingBoi.Actions.BerserkerRage] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Violent] * Regular_Higher_Multiplier));
         potentialActions[(int) VikingBoi.Actions.MockingAttack] *= (1 + (stats.Traits[(int)VikingBoi.Traits.Violent] * Regular_Lower_Multiplier));
 
